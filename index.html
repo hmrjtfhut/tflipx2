@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super T-Spin Double with Vendetta</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            flex-direction: column;
+        }
+        .tetris-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        #tspin-gif {
+            width: 200px; /* 50% smaller than the original 400px width */
+            height: auto;
+            display: none; /* Hide GIF initially */
+        }
+        #vendetta {
+            position: absolute;
+            bottom: 10px;
+            left: -100px;
+            width: 80px;
+            transition: transform 1s;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="tetris-container">
+        <img id="vendetta" src="Vendetta_2008.png" alt="Vendetta">
+        <img id="tspin-gif" src="https://cdn.harddrop.com/2/2a/Super_T-Spin_Double_Set-Up.gif" alt="T-Spin Double GIF">
+    </div>
+
+    <button onclick="startTSpin()">Start T-Spin</button>
+
+    <script>
+        const vendetta = document.getElementById('vendetta');
+        const tspinGif = document.getElementById('tspin-gif');
+
+        function startTSpin() {
+            // Reset the GIF to start from the beginning
+            tspinGif.style.display = 'none';  // Hide the GIF
+            tspinGif.src = '';  // Reset the source to force restart
+            tspinGif.src = 'https://cdn.harddrop.com/2/2a/Super_T-Spin_Double_Set-Up.gif';  // Reload the GIF
+            tspinGif.style.display = 'block';  // Show the GIF
+            
+            // Animate Vendetta's jump
+            vendetta.style.transform = 'translateY(-50px)';
+            
+            // Return Vendetta to original position after the jump
+            setTimeout(() => {
+                vendetta.style.transform = 'translateY(0)';
+            }, 1000);
+
+            // Hide the GIF after 10 seconds (once the animation completes)
+            setTimeout(() => {
+                tspinGif.style.display = 'none';
+            }, 100000); // 10 seconds
+        }
+    </script>
+
+</body>
+</html>
